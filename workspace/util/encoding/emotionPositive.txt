@@ -1,0 +1,8 @@
+intensity	emotion
+1	very negative
+2	negative
+3	little negative
+4	normal
+5	little positive
+6	positive
+7	very positive

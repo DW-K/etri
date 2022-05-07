@@ -1,0 +1,6 @@
+code	condition_with
+1	with families
+2	with friends
+3	with colleagues
+4	acquaintances
+5	others

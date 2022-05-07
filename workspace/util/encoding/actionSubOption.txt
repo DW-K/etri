@@ -1,0 +1,8 @@
+code	action_move	action_meal
+1	walk	light
+2	driving	moderate
+3	taxi, passenger	heavy
+4	personal mobility
+5	bus
+6	train, subway
+7	others

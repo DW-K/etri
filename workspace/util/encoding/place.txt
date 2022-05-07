@@ -1,0 +1,6 @@
+code	place
+0	home
+1	workplace
+2	restaurant
+3	outdoor
+4	other_indoor

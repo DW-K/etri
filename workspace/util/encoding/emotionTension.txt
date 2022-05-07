@@ -1,0 +1,8 @@
+intensity	tension
+1	very relaxed
+2	relaxed
+3	little relaxed
+4	normal
+5	little aroused
+6	aroused
+7	very aroused

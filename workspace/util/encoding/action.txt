@@ -1,0 +1,17 @@
+code	action
+0	sleep
+1	personal_care
+2	work
+3	study
+4	household
+5	care_housemem
+6	recreation_media
+7	entertainment
+8	outdoor_act
+9	hobby
+10	recreation_etc
+11	shop
+12	community_interaction
+13	travel
+14	meal
+15	socialising

@@ -1,0 +1,4 @@
+code	condition
+0	ALONE
+1	WITH_ONE
+2	WITH_MANY

@@ -1,0 +1,4 @@
+code	condition_conversation
+1	passive in conversation
+2	moderate participation in conversation
+3	active in conversation
