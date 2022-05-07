@@ -9,19 +9,8 @@ from workspace.util.Encoding import user_label_encoder
 from workspace.util.User import get_user_list
 from workspace.util.getData import get_data, preprocessing
 
-if __name__ == "__main__":
-    batch_size = 256
-    sequence_size = 5
-    interval = 1
 
-    user_list = get_user_list()[:-2]
-    ul = user_label_encoder()
-
-    target_col = 'emotionPositive'
-
-    drop_col = ['mAcc_x', 'mAcc_y', 'mAcc_z', 'mGps_lat', 'mGps_lon', 'mGps_accuracy', 'mGyr_x', 'mGyr_y', 'mGyr_z',
-                'mGyr_roll', 'mGyr_pitch', 'mGyr_yaw', 'mMag_x', 'mMag_y', 'mMag_z']
-
+def train(batch_size, sequence_size, interval, user_list, target_col, drop_col, num_layers, hidden_size, lr, epochs, model_func, model_name):
     X_array, y_array = get_data(user_list, target_col, sequence_size, interval, drop_col)
 
     X_train, y_train, X_test, y_test, X_val, y_val = preprocessing(X_array, y_array)
@@ -37,16 +26,13 @@ if __name__ == "__main__":
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     print(device)
-    num_layers = 5
-    lr = 0.001
-    epochs = 340
 
     input_size = X_array.shape[-1]
-    hidden_size = 128
+
     # num_classes = ul.get_label_size(target_col)
     num_classes = 1
 
-    model = GRU_bi(input_size=input_size, hidden_size=hidden_size, sequence_size=sequence_size,
+    model = model_func(input_size=input_size, hidden_size=hidden_size, sequence_size=sequence_size,
                        num_layers=num_layers, num_classes=num_classes, device=device).to(device)
 
     optim_func = torch.optim.Adam
@@ -60,4 +46,4 @@ if __name__ == "__main__":
     # epochs=1000, print_epoch=50):
     reg_training(model=model, optim_func=optim_func, loss_func=loss_func, train_dl=train_dl, test_dl=test_dl,
                  val_dl=val_dl, lr=lr,
-                 model_name='bi_gru_e4_hidden128_reg', target_col=target_col, device=device, epochs=epochs)
+                 model_name=model_name, target_col=target_col, device=device, epochs=epochs)

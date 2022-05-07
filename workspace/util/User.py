@@ -4,6 +4,8 @@ from datetime import datetime
 import time
 from bisect import bisect
 
+from workspace.util.combine_dataset import get_sensor_label
+
 dataset_path = r'../../dataset'
 
 
@@ -141,11 +143,17 @@ class combine:
         df = df.reset_index(drop=True)
         return df
 
-    def get_combine_data(self, day: datetime):
+    def get_combine_data(self, day: datetime, interval: int = 1):
         day_ts = mk_ts(day)
         path = self.path + f'/{day_ts}.csv'
 
-        df = pd.read_csv(path, index_col='Unnamed: 0')
+        if not os.path.exists(path):
+            ll = lifelog(self.user_num)
+            cat_list = ll.get_category()
+            df = get_sensor_label(ll, day, cat_list, interval)
+            df.to_csv(path)
+        else:
+            df = pd.read_csv(path, index_col='Unnamed: 0')
 
         return df
 

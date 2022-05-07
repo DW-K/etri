@@ -18,7 +18,14 @@ def create_dir(path: str):
 def integ(userNum: str):
     mk_ts = lambda d: int(d.timestamp())
 
-    ll = lifelog(userNum)
+    create_dir(path)
+    create_dir(integ_path)
+
+    try:
+        ll = lifelog(userNum)
+    except:
+        return
+
     date_list = ll.get_date()
     category_list = ll.get_category()
     category_list.append('label')
